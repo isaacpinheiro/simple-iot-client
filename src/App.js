@@ -16,7 +16,7 @@ class App extends React.Component {
 
     request() {
 
-        fetch("/v2/entities", {
+        fetch("/v2/entities?limit=1000", {
             method: "GET"
         })
         .then(response => response.json())
