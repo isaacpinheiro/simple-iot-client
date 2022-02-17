@@ -8,6 +8,8 @@ class App extends React.Component {
 
         this.state = {
             devices: [],
+            user: "",
+            password: ""
         };
 
         this.request = this.request.bind(this);
@@ -16,8 +18,13 @@ class App extends React.Component {
 
     request() {
 
-        fetch("/v2/entities?limit=1000", {
-            method: "GET"
+        let auth = this.state.user + ":" + this.state.password;
+
+        fetch("/broker/entities?limit=1000", {
+            method: "GET",
+            headers: {
+                "Authorization": "Basic " + btoa(auth)
+            }
         })
         .then(response => response.json())
         .then(responseJson => {
